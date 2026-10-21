@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para ti ✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #f7f3ed;
+      --card-bg: #fffcf8;
+      --text-main: #2b2521;
+      --text-muted: #756a63;
+      --accent: #b85d4f;
+      --shadow: 0 10px 30px rgba(43, 37, 33, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card-container {
+      background: var(--card-bg);
+      width: 100%;
+      max-width: 390px;
+      padding: 30px 24px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      position: relative;
+      transform: rotate(-1deg);
+      transition: transform 0.3s ease;
+    }
+
+    .card-container:hover {
+      transform: rotate(0deg);
+    }
+
+    /* Cinta adhesiva decorativa */
+    .tape {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 22px;
+      background: rgba(220, 205, 180, 0.65);
+      border: 1px dashed rgba(255, 255, 255, 0.5);
+    }
+
+    .photo-frame {
+      background: #fff;
+      padding: 10px 10px 16px 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      margin-bottom: 24px;
+      transform: rotate(1.5deg);
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 2px;
+      filter: sepia(0.12) contrast(1.05);
+    }
+
+    .photo-caption {
+      font-family: 'Caveat', cursive;
+      font-size: 1.6rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    .message {
+      font-family: 'Caveat', cursive;
+      font-size: 1.35rem;
+      line-height: 1.5;
+      color: var(--text-main);
+      margin-bottom: 24px;
+      min-height: 180px;
+      white-space: pre-line;
+      text-align: center;
+    }
+
+    .btn-heart {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(184, 93, 79, 0.3);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-heart:active {
+      transform: scale(0.95);
+    }
+
+    .hidden-note {
+      margin-top: 18px;
+      font-size: 1.25rem;
+      font-family: 'Caveat', cursive;
+      color: var(--text-muted);
+      line-height: 1.45;
+      white-space: pre-line;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .hidden-note.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card-container">
+    <div class="tape"></div>
+
+    <!-- Tu foto local -->
+    <div class="photo-frame">
+      <img src="Mi-foto.jpg" alt="Para ti">
+      <div class="photo-caption">un lindo detalle ✨</div>
+    </div>
+
+    <!-- Poema principal escrito a máquina -->
+    <div class="message" id="typedMessage"></div>
+
+    <button class="btn-heart" id="btnSurprise">Toca aquí ♥</button>
+    
+    <!-- Mensaje desplegable -->
+    <div class="hidden-note" id="hiddenNote">No cambies nunca tu bonita forma de ser. Sigue con tu buen corazón y sé tan noble como siempre... Vayas donde vayas, lleva siempre lo más bonito de ti. ✨</div>
+  </div>
+
+  <script>
+    const text = "¿Bonita?\n\nBonitas las conversaciones que tenemos hasta la madrugada,\nbonita tu mirada que hace que todo sea mejor,\nbonita tu sonrisa que alegra mis mañanas,\nbonita tu voz que calma todo lo malo...\nbonita tú, que le devuelves la alegría a mi vida.";
+    
+    const messageEl = document.getElementById('typedMessage');
+    let idx = 0;
+
+    function typeWriter() {
+      if (idx < text.length) {
+        messageEl.textContent += text.charAt(idx);
+        idx++;
+        setTimeout(typeWriter, 35);
+      }
+    }
+
+    setTimeout(typeWriter, 400);
+
+    const btn = document.getElementById('btnSurprise');
+    const note = document.getElementById('hiddenNote');
+
+    btn.addEventListener('click', () => {
+      note.classList.toggle('show');
+      btn.textContent = note.classList.contains('show') ? "Ocultar ♥" : "Toca aquí ♥";
+    });
+  </script>
+</body>
+</html>
